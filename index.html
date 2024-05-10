@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./public/icons/favicon.ico" type="image/x-icon">
+  <title>Document</title>
+</head>
+
+<body>
+  <header></header>
+  <main class="container my-3" >
+    <form  class="needs-validation" id="form" action="./index.html" method="post">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" name="Name" placeholder="Name(s)" required>
+        <label for="floatingInput">Name(s)</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last name(s)" required>
+        <label for="floatingInput">Last name(s)</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com" required>
+        <label for="floatingInput">Email</label>
+      </div>
+
+      <div class="text-center">
+        <button id="btn-save" type="submit" class="btn btn-success">Save</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+      </div>
+
+
+
+    </form>
+    <caption class="caption-top">List of coders</caption>
+    <table class="table table-hover table-striped table-bordered border-primary text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+
+    </table>
+
+  </main>
+  <footer></footer>
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+
+</html>
