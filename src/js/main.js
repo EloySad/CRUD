@@ -7,7 +7,7 @@ import * as bootstrap from 'bootstrap'
 // Import database
 import { coders } from '../../public/data/database.js'
 
-import { create, index } from './operations'
+import { create, deleteItem, index } from './operations'
 import { showSmallAlertSuccess } from './alerts'
 
 
@@ -17,44 +17,53 @@ const name = document.getElementById("name")
 const lastName = document.getElementById("last-name")
 const email = document.getElementById("email")
 const form = document.getElementById("form")
+let idToEdit
 
 index(coders, tbody)
 
 form.addEventListener("submit", function (event) {
 
-    if (form.checkValidity()) {
+    if (idToEdit === undefined) {
         create(coders, name, lastName, email)
         showSmallAlertSuccess("saved")
     }
+    else {
+        for (const coder of coders) {
+            if (coder.id == idToEdit) {
+                coder.name = name.value
+                coder.lastName = lastName.value
+                coder.email = email.value
+            }
+        }
+        showSmallAlertSuccess("User Update")
+    }
 
     form.reset()
-    event.preventDefault()
     index(coders, tbody)
+    event.preventDefault()
 
 })
 
 table.addEventListener("click", function (event) {
 
     if (event.target.classList.contains("btn-danger")) {
-
         const idToDelete = event.target.getAttribute("data-id")
-
-        coders.forEach((coder, index) => {
-
-            if (coder.id == idToDelete) {
-                coders.splice(index, 1)
-            }
-        })
+        deleteItem(coders, idToDelete)
+        showSmallAlertSuccess("User Delete")
         index(coders, tbody)
-        showSmallAlertSuccess("Usuario eliminado correctamente")
-    } else {
-        showSmallAlertSuccess("Cuidadito Wasawsky")
+    }
+
+    if (event.target.classList.contains("btn-primary")) {
+        idToEdit = event.target.getAttribute("data-id")
+        showSmallAlertSuccess("You Can Edit User")
+
+        //Se busca al usuario en la base de datos
+        const userFound = coders.find(coder => coder.id == idToEdit)
+
+        //retornar los datos al formulario
+        name.value = userFound.name
+        lastName.value = userFound.lastName
+        email.value = userFound.email
     }
 
 })
-
-// coders.forEach(coder => {
-//     if (coder.id == 1 ) {
-//         coders.splice(coders.indexOf(coder), 1)
-//     }
-// })

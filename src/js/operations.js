@@ -1,8 +1,8 @@
-export function index(coders,tbody) {
+export function index(coders, tbody) {
 
   tbody.innerHTML = ``
 
-    coders.forEach(coder => {
+  coders.forEach(coder => {
     tbody.innerHTML += `
     <tr>
         <th scope="row">${coder.id}</th>
@@ -16,16 +16,25 @@ export function index(coders,tbody) {
         </td>
         
   </tr>`
-});
+  });
 }
 
-export function create(coders, name, lastName,email) {
+export function create(coders, name, lastName, email) {
   const tempCoder = {
     id: Date.now(),
     name: name.value,
     lastName: lastName.value,
     email: email.value
+  }
+
+  coders.push(tempCoder)
 }
 
-coders.push(tempCoder)
+export function deleteItem(coders, idToDelete) {
+  coders.forEach((coder, index) => {
+
+    if (coder.id == idToDelete) {
+      coders.splice(index, 1)
+    }
+  })
 }
